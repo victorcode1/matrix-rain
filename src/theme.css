@@ -1,0 +1,83 @@
+/* Faint phosphor glow, shown when the scene is not published or not loaded. */
+.dark [data-workspace-area="conversation"] {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(57, 255, 122, 0.05),
+      transparent 65%
+    ),
+    #020604;
+}
+
+/* With the scene running behind the app, let it show through the chat. */
+html.dark[data-theme-scene] [data-slot="sidebar-inset"],
+html.dark[data-theme-scene] [data-chat-view],
+html.dark[data-theme-scene] [data-workspace-area="conversation"] {
+  background: transparent;
+}
+
+/* Replies sit on a dark glass panel so the rain never runs through the text. */
+html.dark[data-theme-scene] [data-message-role="assistant"] .chat-markdown {
+  padding: 14px 18px;
+  border: 1px solid rgb(57 255 122 / 0.18);
+  border-radius: 6px;
+  background: rgb(2 6 4 / 0.84);
+  box-shadow:
+    0 18px 56px rgb(0 0 0 / 0.3),
+    inset 0 0 24px rgb(57 255 122 / 0.03);
+  text-shadow: 0 1px 1px rgb(0 0 0 / 0.9);
+}
+
+html.dark[data-theme-scene] [data-user-message-bubble] {
+  background: rgb(9 22 13 / 0.88);
+  border-color: rgb(57 255 122 / 0.2);
+}
+
+.dark [data-chat-header] {
+  background: #040a06;
+  border-bottom-color: #10201a;
+}
+
+.dark [data-slot="composer-host"] {
+  background: #07110a;
+  border-color: #1a3a24;
+  box-shadow:
+    0 16px 40px #00000080,
+    0 0 0 1px rgb(57 255 122 / 0.04);
+}
+
+.dark [data-slot="composer-host"]:focus-within {
+  border-color: #2b6b40;
+}
+
+.dark [data-user-message-bubble] {
+  background: #09160d;
+  color: #d4f8dc;
+  border: 1px solid #17301f;
+}
+
+.dark [data-thread-details-card] {
+  background: #07110a;
+  border-color: #13261a;
+}
+
+.dark .chat-markdown h1,
+.dark .chat-markdown h2,
+.dark .chat-markdown h3 {
+  color: #8dffae;
+  text-shadow: 0 0 12px rgb(57 255 122 / 0.25);
+}
+
+.dark .chat-markdown a {
+  color: #5cff92;
+  text-decoration-color: #5cff9255;
+  text-underline-offset: 3px;
+}
+
+.dark .chat-markdown :not(pre) > code {
+  color: #8dffae;
+}
+
+.dark .chat-markdown-codeblock {
+  border-color: #13261a;
+}
