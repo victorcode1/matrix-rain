@@ -10,7 +10,7 @@
         margin: 0;
         height: 100%;
         overflow: hidden;
-        background: #000;
+        background: #020604;
       }
       canvas {
         display: block;
@@ -43,13 +43,13 @@
           y: Math.random() * height,
           speed: 0.6 + Math.random() * 1.4,
         }));
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#020604";
         ctx.fillRect(0, 0, width, height);
         if (motion.matches) draw(true);
       }
 
       function draw(still = false) {
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = still ? "#020604" : "rgba(2, 6, 4, 0.12)";
         ctx.fillRect(0, 0, width, height);
         for (let i = 0; i < columns.length; i++) {
           const column = columns[i];
@@ -59,16 +59,12 @@
             pointer.active && distance < 100
               ? (x < pointer.x ? -1 : 1) * (100 - distance) * 0.45
               : 0;
-          for (let trail = 8; trail >= 0; trail--) {
-            const alpha = (9 - trail) / 12;
-            ctx.fillStyle =
-              trail === 0 ? "#b4ffd0" : `rgba(36, 141, 70, ${alpha})`;
-            ctx.fillText(
-              glyphs[Math.floor(Math.random() * glyphs.length)],
-              x + displacement,
-              column.y - trail * size,
-            );
-          }
+          ctx.fillStyle = Math.random() > 0.96 ? "#b4ffd0" : "#248d46";
+          ctx.fillText(
+            glyphs[Math.floor(Math.random() * glyphs.length)],
+            x + displacement,
+            column.y,
+          );
           if (!still) column.y += size * column.speed;
           if (column.y > height + 100 && Math.random() > 0.95) column.y = -size;
         }
