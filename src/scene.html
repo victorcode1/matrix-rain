@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matrix Rain scene</title>
     <style>
-      html, body { margin: 0; height: 100%; overflow: hidden; background: #020604; }
-      canvas { display: block; width: 100%; height: 100%; }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #020604;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
@@ -15,7 +25,8 @@
       const canvas = document.getElementById("rain");
       const ctx = canvas.getContext("2d");
       const motion = matchMedia("(prefers-reduced-motion: reduce)");
-      const glyphs = "アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789";
+      const glyphs =
+        "アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789";
       const size = 18;
       const pointer = { x: 0, y: 0, active: false };
       let width, height, columns, timer;
@@ -44,9 +55,16 @@
           const column = columns[i];
           const x = i * size;
           const distance = Math.hypot(x - pointer.x, column.y - pointer.y);
-          const displacement = pointer.active && distance < 100 ? (x < pointer.x ? -1 : 1) * (100 - distance) * 0.45 : 0;
+          const displacement =
+            pointer.active && distance < 100
+              ? (x < pointer.x ? -1 : 1) * (100 - distance) * 0.45
+              : 0;
           ctx.fillStyle = Math.random() > 0.96 ? "#b4ffd0" : "#248d46";
-          ctx.fillText(glyphs[Math.floor(Math.random() * glyphs.length)], x + displacement, column.y);
+          ctx.fillText(
+            glyphs[Math.floor(Math.random() * glyphs.length)],
+            x + displacement,
+            column.y,
+          );
           if (!still) column.y += size * column.speed;
           if (column.y > height + 100 && Math.random() > 0.95) column.y = -size;
         }
@@ -58,8 +76,10 @@
         else if (!document.hidden) timer = setInterval(draw, 80);
       }
       addEventListener("message", ({ data }) => {
-        if (data?.type === "t3-theme-scene:pointer") Object.assign(pointer, { x: data.x, y: data.y, active: true });
-        else if (data?.type === "t3-theme-scene:pointer-leave") pointer.active = false;
+        if (data?.type === "t3-theme-scene:pointer")
+          Object.assign(pointer, { x: data.x, y: data.y, active: true });
+        else if (data?.type === "t3-theme-scene:pointer-leave")
+          pointer.active = false;
       });
       addEventListener("resize", resize);
       motion.addEventListener("change", schedule);
